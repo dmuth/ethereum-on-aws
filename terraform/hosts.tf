@@ -9,7 +9,7 @@ resource "aws_instance" "ethereum1" {
 	#instance_type			= "t2.small" # 2 GB RAM, 1 core
 	#instance_type			= "t2.medium" # 4 GB RAM/ 2 cores
 	instance_type			= "t2.large" # 8 GB RAM/ 2 cores
-	key_name				= "aws-ec2"
+	key_name				= "${var.ec2_key}"
 
 	vpc_security_group_ids	= ["${aws_security_group.ethereum.id}"]
 	subnet_id = "subnet-f41254bc"

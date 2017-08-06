@@ -19,6 +19,15 @@ variable "vpc_id" {
 
 
 #
+# EC2 
+#
+variable "ec2_key" {
+	type		= "string"
+	default		= "FIXME" # Fill this in with your own value
+}
+
+
+#
 # Our S3 bucket for storing Ethereum data in.
 #
 variable "s3_bucket" {
