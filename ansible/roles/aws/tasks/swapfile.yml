@@ -1,0 +1,40 @@
+
+
+- name: Create swapfile
+  action: command dd if=/dev/zero of=/swapfile bs=1M count=1024 creates=/swapfile
+
+- name: Set up permissions
+  file: path=/swapfile owner=root group=root mode=0600
+
+- name: Format swapfile /swapfile
+  action: command mkswap /swapfile creates=/opt/swapfile-formatted
+  
+- name: Format swapfile, part 2
+  action: command touch /opt/swapfile-formatted creates=/opt/swapfile-formatted
+
+- name: Activate swapfile
+  action: command swapon /swapfile creates=/opt/swapfile-activated
+
+- name: Activate swapfile, part 2
+  action: command touch /opt/swapfile-activated creates=/opt/swapfile-activated
+
+- name: Update /etc/fstab
+  lineinfile:
+    name: /etc/fstab
+    line: /swapfile       none    swap    sw      0       0
+    insertafter: EOF
+
+- name: Set swappiness in /proc/sys/vm/swappiness
+  action: shell echo 10 | tee /proc/sys/vm/swappiness creates=/opt/swapfile-swappiness
+
+- name: Set swappiness, part 2
+  action: command touch /opt/swapfile-swappiness creates=/opt/swapfile-swappiness
+
+- name: Set swappiness in /etc/sysctl.conf
+  lineinfile:
+    name: /etc/sysctl.conf
+    line: vm.swappiness = 10
+    insertafter: EOF
+
+
+

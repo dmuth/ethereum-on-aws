@@ -1,0 +1,9 @@
+
+- name: Install AWS CLI
+  apt: name=awscli update_cache=yes
+
+- name: Swapfile
+  include: swapfile.yml
+  tags: aws-swapfile
+
+

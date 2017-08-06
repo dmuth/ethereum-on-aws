@@ -1,0 +1,8 @@
+
+
+[ethereum]
+eth1.dmuth.org package_manager="apt"
+#eth2.dmuth.org package_manager="apt"
+
+
+

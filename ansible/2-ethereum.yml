@@ -1,0 +1,10 @@
+
+
+- hosts: all
+
+  roles:
+    - { role: aws, tags: aws }
+    - { role: monitoring, tags: monitoring }
+    - { role: tmux, tags: tmux }
+    - { role: geth, tags: geth }
+

@@ -1,0 +1,15 @@
+
+
+- hosts: all
+
+  #
+  # Use this to install Python, since Ubuntu 16.04 doesn't ship with it, apparently.
+  #
+  gather_facts: no
+  pre_tasks:
+    - name: "install python2"
+      raw: sudo apt-get -y install python-simplejson
+
+  roles:
+    - { role: ping, tags: ping }
+

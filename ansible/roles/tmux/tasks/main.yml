@@ -1,0 +1,11 @@
+
+- name: Install Tmux
+  package: name=tmux state=installed use={{ package_manager }}
+
+- name: Install tmux.conf
+  copy: src=roles/tmux/files/dot-tmux.conf dest=/home/ubuntu/.tmux.conf owner=ubuntu
+
+- name: Install tmux.reset.conf
+  copy: src=roles/tmux/files/dot-tmux.reset.conf dest=/home/ubuntu/.tmux.reset.conf owner=ubuntu
+
+

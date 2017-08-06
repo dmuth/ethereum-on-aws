@@ -1,0 +1,26 @@
+
+#
+# These instructions come from:
+# https://www.ethereum.org/cli
+#
+
+#sudo apt-get install software-properties-common
+
+- name: Add Ethereum Repo
+  apt_repository: repo="ppa:ethereum/ethereum"
+
+- name: Install Geth (and update apt cache so this works...)
+  apt: name=ethereum update_cache=yes
+
+- name: Install iftop
+  apt: name=iftop
+
+- name: Install moreutils (and ts!)
+  apt: name=moreutils
+
+- name: Update max number of open files
+  lineinfile:
+    dest: /etc/security/limits.conf
+    line: "*     soft     nofile     32768\n*     hard     nofile     32768"
+
+

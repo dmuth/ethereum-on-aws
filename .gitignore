@@ -1,0 +1,10 @@
+
+#
+# Stuff from Terraform
+#
+terraform.tfstate*
+.terraform.tfstate*
+
+# Vim droppings
+*.swp
+
