@@ -96,6 +96,18 @@ at the expense of requiring an instance with more RAM.
    - If you want to keep the S3 bucket, comment out the lines in that file first!
 
 
+## So What Comes Next?
+
+Ultimately, I was not sucessful at getting a fully functioning Ethereum node on my machine--at least
+not to my satisfaction, as I was hoping to be able to send/receive from money and write some
+<a href="https://solidity.readthedocs.io/">Solidity code</a>.
+
+My next step will be to try <a href="https://parity.io/">the lightweight Parity client</a> and see 
+if I have more luck with it.  Watch my GitHub repo and/or <a href="http://www.dmuth.org/">my blog</a> 
+for more news on that front. :-)
+
+
+
 ## Footnotes
 
 <a name="note1"></a>[1] <a href="#back1">^</a> But hey, I'm new to Ethereum, and maybe I did something wrong.  If that's the case, feel
