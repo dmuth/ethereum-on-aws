@@ -53,6 +53,43 @@ To monitor the status of Geth while it is running, I recommend this command:
 `while true; do  echo "eth.syncing" | geth attach; echo "admin.peers.length" | geth attach; sleep 30; done  | ts | tee output.txt`
 
 
+## Saving Progress to S3
+
+Part of the Terraform setup applies a role to the EC2 instance which will grant access to the S3 bucket 
+which was created by Terraform.  If you want to save your progress with Geth between sessions, that 
+can be done by using `aws s3 sync` to copy up the files and then copy them down after standing up a new machine.
+
+
+## Monitoring Resource Usage
+
+The Ansible playbook installs <a href="http://munin-monitoring.org/">Munin</a> on the server, and you 
+can pull up the graphs by going to `http://hostname/munin/`.  This is useful to watch CPU usage, RAM usage,
+and especially Swapfile usage.  If you notice the swapfile getting hammered, it probably means you need
+more RAM. (took me several m2.small and m2.medium instances to figure THAT one out!)
+
+
+### Actual Resource Graphs
+
+Here are some actual resource graphs from running Geth on a m2.large instance:
+
+The I/O Wait on our CPUs are increasing, which means we probably don't have enough RAM:
+<img src="img/cpu.png"/>
+
+There is substantial network usage once the node starts acting like a peer and sending traffic out.
+This is worth noting, as AWS charges 9 cents per GB out as of this writing:
+<img src="img/network.png"/>
+
+RAM usage has actually gone down a bit, which I can't fully explain...
+<img src="img/ram.png"/>
+
+Swap isn't hit all that much, which is also a good sign:
+<img src="img/swap.png"/>
+
+Based on the above graphs, I would say that the I/O Wait is not due to excessive swap, but due to cache misses
+either in Geth or in the system cache itself.  Running Geth with a larger `--cache` setting may help, possibly
+at the expense of requiring an instance with more RAM.
+
+
 ## Finishing Up
 
 - Run `terraform destroy` and then type `yes` to remove your EC2 instance, DNS name, and S3 bucket.
