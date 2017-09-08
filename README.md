@@ -2,7 +2,7 @@
 
 This repo contains Terraform and Ansible files to set up an AWS EC2 instance to run Ethereum's <a href="https://github.com/ethereum/go-ethereum/wiki/geth">Geth client</a>.  
 This was a proof of concept that I did to see if such a thing was really possible.  Sad news: 
-it's non-trivial to pull off, because with 4.1 Ethereum blocks as of this writing, it takes many 
+it's non-trivial to pull off, because with 4.1 million Ethereum blocks as of this writing, it takes many 
 many hours for the node to sync up with the full block chain. <a href="#note1">[1]</a><a name="back1"></a>  
 
 That said, I still wanted to publish this so that others may perhaps benefit from it.
